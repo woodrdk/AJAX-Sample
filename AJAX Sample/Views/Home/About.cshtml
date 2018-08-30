@@ -5,3 +5,34 @@
 <h3>@ViewBag.Message</h3>
 
 <p>Use this area to provide additional information.</p>
+
+
+@Ajax.ActionLink("Talk to server", "AjaxTest",
+    new AjaxOptions
+    {
+        HttpMethod = "Get",
+        Confirm = "Are you sure?",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId =  "UpdateDiv",
+        OnBegin = "startAjaxCall",
+        OnComplete =  "endAjaxCall"
+    })
+
+<br /><br />
+<img height="40" scr="~/Images/loading.gif" class="img-circle" hidden id="loading"/>
+<div id="UpdateDiv"></div>
+
+<script>
+    function startAjaxCall() {
+        let loadingImage = document.getElementById("loading");
+        loadingImage.removeAttribute("hidden");
+    }
+
+    function endAjaxCall() {
+        let loadingImage = document.getElementById("loading"); 
+        // or let  loadingImage = $("#loading");
+        
+        loadingImage.attr("hidden", true)
+        // or loadingImage.setAttribute("hidden", true);
+    }
+</script>
